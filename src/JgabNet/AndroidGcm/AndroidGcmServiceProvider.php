@@ -11,14 +11,28 @@ class AndroidGcmServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
-	/**
+    public function boot()
+    {
+        $this->package('jgab-net/android-gcm');
+    }
+
+    /**
 	 * Register the service provider.
 	 *
 	 * @return void
 	 */
 	public function register()
 	{
-		//
+
+		$this->app['androidgcm'] = $this->app->share(function($app){
+           return new AndroidGcm($app['config']->get('android-gcm::api_key', null));
+        });
+
+        $this->app->booting(function()
+        {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('AndroidGcm', 'JgabNet\Support\Facades\AndroidGcm');
+        });
 	}
 
 	/**
@@ -28,7 +42,7 @@ class AndroidGcmServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('androidGcm');
 	}
 
 }

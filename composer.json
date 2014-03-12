@@ -9,11 +9,13 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "illuminate/support": "4.1.*"
+        "illuminate/support": "4.1.*",
+        "illuminate/database": "4.1.*"
     },
     "autoload": {
         "psr-0": {
-            "JgabNet\\AndroidGcm": "src/"
+            "JgabNet\\AndroidGcm": "src/",
+            "JgabNet\\Support": "src/"
         }
     },
     "minimum-stability": "stable"
