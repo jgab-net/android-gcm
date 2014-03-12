@@ -50,7 +50,7 @@ class AndroidGcm {
             )
         ));
 
-        $result = file_get_contents('http://developer.android.com/google/gcm/http.html#auth', false, $context);
+        $result = file_get_contents('https://android.googleapis.com/gcm/send', false, $context);
 
         if($result){
             //$result = json_decode($result);
