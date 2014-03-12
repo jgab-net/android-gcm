@@ -40,9 +40,10 @@ class AndroidGcm {
         $context = stream_context_create(array(
             'http' => array(
                 'method' => 'POST',
-                'header' =>
-                    'Content-Type: application/json'.
+                'header' => array(
                     'Authorization: Key='.$this->apiKey,
+                    'Content-Type: application/json'
+                ),
                 'content' => json_encode(array(
                     'registration_ids' => $registrationIds,
                     'collapse_key' => 'Updates Available'
