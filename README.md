@@ -85,7 +85,8 @@ La librería internamete reemplazara los tokens(registration_ids) desactualizado
 AndroidGcm::send($registrationIds,function($successRegistrationIds){  
 
     /*
-      Aquí puedes actualizar la bandera que indique que ya no debes enviar la notificación a los dispositivos
+      Aquí puedes actualizar la bandera que indique que ya no debes 
+      enviar la notificación a los dispositivos
       Puedes usar $successRegistrationIds para valerte de esto.
     */
 });
