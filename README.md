@@ -24,22 +24,22 @@ php artisan config:publish jgab-net/android-gcm
 ```php
 
 return array(
-    'api_key' => 'aqui el api_key'
+    'api_key' => 'aquí el api_key'
 );
 
 ```
 ### Configurando base de datos
-Es necesario correr la migración del paquete para que se genere la tabla donde se guardaran los tokens (registrations_id) que representan los dispositivos android que recibiran notificaciones
+Es necesario correr la migración del paquete para que se genere la tabla donde se guardaran los tokens (registrations_id) que representan los dispositivos android que recibirán notificaciones
 ```shell
 
 php artisan migrate --package=jgab-net/android-gcm
 
 ```
->Es importante que esta migración se ejecute despues de que corras las migraciones de tu proyecto o exista la tabla users en tu sistema, porque se creara una clave foranea con users.id, si no existe la tabla la migración mostrara un error, sin embargo puedes continuar ignorando el error, simplemente perderas la clave foranea
+>Es importante que esta migración se ejecute después de que corras las migraciones de tu proyecto o exista la tabla users en tu sistema, porque se creara una clave foránea con users.id, si no existe la tabla la migración mostrará un error, sin embargo puedes continuar ignorando el error, simplemente perderás la clave foranea
 
 ### Programando
 
-Para almacenar el token(registration_id) solo necesitas agregar la siguiente linea, en el lugar que lo desees (el registration_id se supone estar llegando desde el dispositivo android, y el user_id pertenece al usuario que accedio a la apliación)
+Para almacenar el token(registration_id) solo necesitas agregar la siguiente línea, en el lugar que lo desees (el registration_id se supone estar llegando desde el dispositivo android, y el user_id pertenece al usuario que accedió a la aplicación)
 ```php
 
 AndroidGcm::addRegistrationId($registration_id, $user_id);
@@ -78,9 +78,9 @@ Route::post('auth',  array('after' => 'android.gcm', 'uses' => 'Vendor\Paquete\C
 ```
 ### Notificando
 
-Para notificar simplemente ejecutamos el methodo send, el primer valor es un array con los tokens(registration_ids) de los dispositivos a notificar, y el segundo es un callback que recibe los tokens(registration_ids) que realmente fueron notificados
+Para notificar simplemente ejecutamos el método send, el primer valor es un array con los tokens(registration_ids) de los dispositivos a notificar, y el segundo es un callback que recibe los tokens(registration_ids) que realmente fueron notificados
 
->La librería internamete reemplazara los tokens(registration_ids) desactualizados, para que en la proxima ejecución del envio se transmitan las notificaciones a los dispositivos faltantes
+>La librería internamente reemplazará los tokens(registration_ids) desactualizados, para que en la próxima ejecución del envio se transmitan las notificaciones a los dispositivos faltantes
 
 ```php
 
