@@ -25,7 +25,7 @@ class AndroidGcmServiceProvider extends ServiceProvider {
 	{
 
 		$this->app['androidgcm'] = $this->app->share(function($app){
-           return new AndroidGcm($app['config']->get('android-gcm::api_key', null));
+           return new AndroidGcm($app['config']->get('android-gcm::api_key', null),$app['config']->get('android-gcm::api_url', null));
         });
 
         $this->app->booting(function()

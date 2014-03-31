@@ -8,9 +8,13 @@
 class AndroidGcm {
 
     protected $apiKey;
+    protected $apiUrl;
 
-    public function __construct($apiKey){
-        $this->apiKey=$apiKey;
+    protected $apiResponse;
+
+    public function __construct($apiKey, $apiUrl){
+        $this->apiKey = $apiKey;
+        $this->apiUrl = $apiUrl;
     }
 
     public function addRegistrationId($registrationId, $userId){
@@ -51,10 +55,10 @@ class AndroidGcm {
             )
         ));
 
-        $result = file_get_contents('https://android.googleapis.com/gcm/send', false, $context);
+        $result = file_get_contents($this->apiUrl, false, $context);
 
         if($result){
-            //$result = json_decode($result);
+            $this->apiResponse = json_decode($result);
 
             /*TODO
             verificar los canonical para saber cuales notificaciones llegaron realmente
@@ -65,6 +69,10 @@ class AndroidGcm {
             $callback($userIds);
 
         }
+    }
+
+    public function getApiResponse(){
+        return $this->apiResponse;
     }
 
 } 
