@@ -35,7 +35,7 @@ class AndroidGcm {
         }
     }
 
-    public function send($userIds, \Closure $callback){
+    public function send($userIds, \Closure $callback = null){
 
 
         $registrationIds = \DB::table('android_gcm')->
@@ -57,17 +57,22 @@ class AndroidGcm {
 
         $result = file_get_contents($this->apiUrl, false, $context);
 
-        if($result){
+        if(true){
             $this->apiResponse = json_decode($result);
 
-            /*TODO
-            verificar los canonical para saber cuales notificaciones llegaron realmente
-            TODO luego actualizar los registrations_ids cambiados y pasar solo al closure
-            los id de usuario que realmente recivieron notificacion
-            */
+            if($this->apiResponse->canonical_ids>0){
 
-            $callback($userIds);
-
+                for($i = 0; $i < count($this->apiResponse->results); $i++){
+                    if(property_exists($this->apiResponse->results[$i],'registration_id')){
+                        \DB::table('android_gcm')
+                            ->where('registration_id',$registrationIds[$i])
+                            ->update(array('registration_id' => $this->apiResponse->results[$i]->registration_id));
+                    }
+                }
+            }
+            if(!is_null($callback)){
+                $callback($userIds);
+            }
         }
     }
 
