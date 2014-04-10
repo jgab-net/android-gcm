@@ -107,3 +107,11 @@ AndroidGcm::send($registrationIds,function($successRegistrationIds) use($otherVa
 });
 
 ```
+
+Para obtener la respuesta real del GCM
+
+```php
+
+AndroidGcm::getApiResponse()
+
+```
