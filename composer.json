@@ -1,6 +1,6 @@
 {
     "name": "jgab-net/android-gcm",
-    "description": "",
+    "description": "Send push notification with GCM",
     "authors": [
         {
             "name": "Abraham José González Barboza",
