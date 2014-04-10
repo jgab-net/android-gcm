@@ -1,6 +1,7 @@
 {
     "name": "jgab-net/android-gcm",
     "description": "Send push notification with GCM",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Abraham José González Barboza",
